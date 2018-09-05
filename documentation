@@ -1,0 +1,72 @@
+1.
+Implement background execution using '&'.
+2.
+Comments. Anything after a '#' to the end
+-
+of
+-
+line is ignored. Note that this automatically allows you to 
+begin your nsh scripts with "#!/home/you/bin/nsh", giving automatic execution of executable nsh scripts.
+3.
+Allow meta
+-
+char
+acters to appear without spaces around them, so "who|wc" works, rather than needing 
+spaces like "who | wc". (You don’t get the marks if you end up using my parser from Part 1, of course.)
+4.
+Implement the shell escape character using "
+\
+", so "echo 
+\
+|" will out
+put a single "|".
+5.
+Implement the “exit” command. With no arguments, it exits with the exit status of the most recently 
+executed command, or it accepts a single integer argument which will be nsh’s exit status.
+6.
+Implement single quoting so arguments can have sp
+aces inside them.
+7.
+Handle more than one pipe. Eg., “who | grep foobar | uniq 
+–
+c | sort 
+–
+nr | less”
+8.
+Implement environment variables. You don't need to distinguish between shell and environment variables 
+(ie, no "export" command). Just use putenv(3c) and getenv
+(3c). Duplicate the Bourne Shell's use of them. 
+This can be tricky, you should carefully experiment with how the Bourne Shell handles variables. Note 
+especially what happens with
+a.
+$ foo='hello world' # there's a space in there
+b.
+$ prargs $foo # how many argumen
+ts is that?
+c.
+$ bar=$foo # does bar become 'hello' or 'hello world'?
+9.
+Implement back
+-
+quotes, ie. an arbitrary nsh command line can be put in back
+-
+quotes, and its output is 
+substituted onto the current command line. Remember to parse the spaces after substitutio
+n.
+10.
+Implement double
+-
+quotes, so variables and back
+-
+quotes can be put inside them. (Of course this only makes 
+sense if you've implemented at least one of variables or back
+-
+quotes.) It must support allowing double
+-
+quotes inside the double quotes using "
+\
+"".
+11.
+Us
+e lex(1) and yacc(1) to do the parsing for you. If you do this, it may actually make some of the other 
+stuff easier, but there's alot to learn to do it. You may use GNU's flex(1) and bison(1) instead
